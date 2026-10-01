@@ -27,7 +27,7 @@ export default function TechStack() {
                   <div className="group flex flex-col items-center justify-center p-6 bg-thirdary/20 hover:bg-thirdary/50 border border-text-secondary/10 hover:border-text-primary/50 rounded-2xl transition-all duration-300 hover:-translate-y-2 h-full">
                     <div className="w-12 h-12 mb-4 flex items-center justify-center pointer-events-none">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={tech.icon} alt={tech.name} className="w-full h-full tech-icon-img dark:invert" />
+                      <img src={tech.icon} alt={tech.name} className={`w-full h-full tech-icon-img ${tech.whiteSource ? "invert dark:invert-0" : "dark:invert"}`} />
                     </div>
                     <span className="text-sm font-bold text-text-primary text-center">{tech.name}</span>
                   </div>

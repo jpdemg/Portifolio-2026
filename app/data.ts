@@ -86,7 +86,7 @@ export const courses = [
   "Foundations of Cybersecurity — Coursera / Google",
 ]
 
-export type TechItem = { name: string; icon: string }
+export type TechItem = { name: string; icon: string; whiteSource?: boolean }
 export type TechCategory = { title: string; description: string; technologies: TechItem[] }
 
 const simpleIcon = (slug: string, color = "000000") => `https://cdn.simpleicons.org/${slug}/${color}`
@@ -120,9 +120,9 @@ export const techCategories: TechCategory[] = [
       { name: "Git", icon: simpleIcon("git") },
       { name: "GitHub", icon: simpleIcon("github") },
       { name: "Figma", icon: simpleIcon("figma") },
-      { name: "Photoshop", icon: simpleIcon("photoshop") },
-      { name: "Excel", icon: simpleIcon("excel") },
-      { name: "Power BI", icon: simpleIcon("powerbi") },
+      { name: "Photoshop", icon: "/icons/photoshop.png" },
+      { name: "Excel", icon: "/icons/excel.png" },
+      { name: "Power BI", icon: "/icons/power-bi-white.svg", whiteSource: true },
     ],
   },
 ]
