@@ -336,8 +336,8 @@ export const projects: Project[] = [
   {
     title: "Switch Mode",
     shortDescription: {
-      pt: "Aplicação pessoal para organização do dia a dia: rotina, lugares, treino e controle de gastos, com autenticação e dados em tempo real.",
-      en: "Personal app for organizing everyday life: routine, places, workouts and spending tracking, with authentication and real-time data.",
+      pt: "O Switch Mode é um modo de captura ágil da câmera para estudantes, ideal para uso com uma mão só e com interface minimalista. Digitaliza lousa e caderno rapidamente, com IA que recorta e corrige a perspectiva automaticamente. Fotos são organizadas por disciplina, cruzando horário da captura com a agenda do aluno, mantendo a galeria limpa. Detecta chaves PIX (email, telefone, aleatória) e abre o app do banco.  Desenhado para produtividade, praticidade e privacidade.",
+      en: "Switch Mode is an agile camera capture mode for students, ideal for use with one hand and a minimalistic interface. Quickly digitizes whiteboards and notebooks, with AI that automatically crops and corrects the perspective. Photos are organized by subject, cross-referencing the capture time with the student's schedule, keeping the gallery clean. Detects PIX keys (email, phone, random) and opens the bank app. Designed for productivity, convenience and privacy.",
     },
     createdAt: "2026",
     features: ["Sete módulos integrados em uma única interface", "Persistência de dados e autenticação via Supabase"],
