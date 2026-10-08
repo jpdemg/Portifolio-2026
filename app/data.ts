@@ -99,6 +99,8 @@ export const techCategories: TechCategory[] = [
       { name: "Python", icon: simpleIcon("python") },
       { name: "JavaScript", icon: simpleIcon("javascript") },
       { name: "SQL", icon: simpleIcon("mysql") },
+      { name: "Node.js", icon: simpleIcon("node.js") },
+      { name: "FastAPI", icon: simpleIcon("fastapi") },
     ],
   },
   {
@@ -106,13 +108,12 @@ export const techCategories: TechCategory[] = [
     description: "Construção de interfaces web.",
     technologies: [
       { name: "React", icon: simpleIcon("react") },
-      { name: "Node.js", icon: simpleIcon("node.js") },
-      { name: "Vercel", icon: simpleIcon("vercel") },
       { name: "HTML5", icon: simpleIcon("html5") },
       { name: "CSS3", icon: simpleIcon("css") },
-      { name: "Vite", icon: simpleIcon("vite") },
+      { name: "Tailwind CSS", icon: simpleIcon("tailwindcss") },
     ],
   },
+
   {
     title: "Ferramentas",
     description: "Versionamento, design e produtividade.",
@@ -187,8 +188,7 @@ export const projects: Project[] = [
     createdAt: "2026",
     features: ["Interface de montagem por drag-and-drop", "Exportação de HTML dentro das restrições reais de clientes de e-mail"],
     tech: ["React", "Drag & Drop", "HTML Email"],
-    image: "/images/projects/mail-builder.png",
-    // Repositório ainda privado — o dono vai disponibilizar publicamente em breve.
+    image: "/images/projects/mail2.png",
   },
   {
     title: "Laberna Dulce",
@@ -225,5 +225,19 @@ export const projects: Project[] = [
     image: "/images/projects/nosso-jardim.png",
     liveDemoUrl: "https://jj-alpha-ten.vercel.app",
     githubUrl: "https://github.com/jpdemg/nosso-jardim",
+  },
+  {
+    title: "Switch Mode",
+    shortDescription:
+      "Aplicação pessoal para organização do dia a dia: rotina, lugares, treino e controle de gastos, com autenticação e dados em tempo real.",
+    createdAt: "2026",
+    features: [
+      "Sete módulos integrados em uma única interface",
+      "Persistência de dados e autenticação via Supabase",
+    ],
+    tech: ["React", "Vite", "Supabase", "IA", "Python", "JavaScript"],
+    image: "/images/projects/JOVI.png",
+    liveDemoUrl: "https://landingpage-iota-indol.vercel.app",
+    githubUrl: "https://github.com/CameraJovi/Landingpage",
   },
 ]
