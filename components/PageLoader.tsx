@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
+import { useLang, ui } from "@/app/i18n"
 
 export default function PageLoader() {
+  const { t } = useLang()
   const [loading, setLoading] = useState(true)
   const [progress, setProgress] = useState(0)
 
@@ -35,7 +37,7 @@ export default function PageLoader() {
           transition={{ duration: 0.4 }}
         >
           <div className="text-center">
-            <p className="text-2xl md:text-3xl font-black tracking-tighter text-text-primary leading-none">Portifólio</p>
+            <p className="text-2xl md:text-3xl font-black tracking-tighter text-text-primary leading-none">{t(ui.brand)}</p>
             <p className="mt-2 text-sm md:text-base font-bold tracking-[0.3em] text-text-secondary uppercase">João Pedro</p>
           </div>
 

@@ -5,8 +5,10 @@ import { useEffect, useState, useMemo } from "react"
 import FadeLeft from "@/components/animations/FadeLeft"
 import FadeRight from "@/components/animations/FadeRight"
 import { profile, quickStats } from "./data"
+import { useLang, ui } from "./i18n"
 
 export default function Hero() {
+  const { t } = useLang()
   const [index, setIndex] = useState(0)
   const [subIndex, setSubIndex] = useState(0)
   const [deleting, setDeleting] = useState(false)
@@ -20,7 +22,7 @@ export default function Hero() {
     const currentIndex = index % texts.length
     const timeout = setTimeout(
       () => {
-        const currentText = texts[currentIndex]
+        const currentText = t(texts[currentIndex])
 
         if (!deleting && subIndex < currentText.length) {
           setSubIndex(subIndex + 1)
@@ -37,26 +39,26 @@ export default function Hero() {
     )
 
     return () => clearTimeout(timeout)
-  }, [subIndex, deleting, index, texts])
+  }, [subIndex, deleting, index, texts, t])
 
   return (
     <section id="home" className="w-full max-w-7xl mx-auto cursor-default grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center px-6 md:px-12 py-24 md:py-32 overflow-hidden">
       <FadeLeft>
         <div className="flex flex-col gap-2">
           <h1 className="text-text-primary text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter leading-tight">
-            Olá, eu sou
+            {t(ui.hero.greeting)}
             <span className="text-transparent bg-clip-text bg-linear-to-r from-text-primary to-text-secondary"> João Pedro</span>
           </h1>
 
           <div className="relative">
             <span className="text-text-primary text-xl md:text-2xl lg:text-3xl font-bold tracking-tight">
-              {texts[index].substring(0, subIndex)}
+              {t(texts[index]).substring(0, subIndex)}
             </span>
             <span className="animate-cursor text-text-secondary text-2xl lg:text-3xl font-light">|</span>
           </div>
 
           <div className="max-w-xl mt-4">
-            <p className="text-text-secondary text-base md:text-lg leading-relaxed font-medium">{profile.bio}</p>
+            <p className="text-text-secondary text-base md:text-lg leading-relaxed font-medium">{t(profile.bio)}</p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
@@ -64,7 +66,7 @@ export default function Hero() {
               onClick={() => handleScroll("projects")}
               className="cursor-pointer text-sm md:text-base font-bold bg-button-hero text-background px-8 py-4 rounded-xl flex flex-row items-center justify-center gap-3 hover:-translate-y-1.5 hover:scale-[1.02] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:hover:shadow-[0_8px_30px_rgba(255,255,255,0.1)] transition-all duration-300 ease-out"
             >
-              Ver projetos
+              {t(ui.hero.viewProjects)}
               <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
               </svg>
@@ -74,7 +76,7 @@ export default function Hero() {
               download
               className="cursor-pointer text-sm md:text-base font-bold border-2 border-text-secondary/20 hover:border-text-primary text-text-primary px-8 py-4 rounded-xl flex flex-row items-center justify-center gap-3 hover:-translate-y-1.5 hover:scale-[1.02] hover:bg-thirdary/40 transition-all duration-300 ease-out bg-background/50 backdrop-blur-sm"
             >
-              Baixar currículo
+              {t(ui.hero.downloadCv)}
               <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2m-8 1V4m0 12-4-4m4 4 4-4" />
               </svg>
@@ -82,7 +84,7 @@ export default function Hero() {
           </div>
 
           <div className="mt-12 pt-8 border-t border-text-secondary/10">
-            <span className="text-xs uppercase tracking-widest font-bold text-text-secondary mb-4 block">Conecte-se</span>
+            <span className="text-xs uppercase tracking-widest font-bold text-text-secondary mb-4 block">{t(ui.hero.connect)}</span>
             <div className="flex flex-row gap-4">
               <a href={`mailto:${profile.email}`} className="p-3 border border-text-secondary/20 rounded-xl hover:border-text-primary hover:bg-text-primary hover:text-background text-text-primary transition-all duration-300">
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,7 +124,7 @@ export default function Hero() {
           <div className="absolute -bottom-10 md:-bottom-12 -left-4 md:-left-12 z-20 flex flex-col gap-3">
             {quickStats.map((stat, i) => (
               <div
-                key={stat.message}
+                key={t(stat.message)}
                 className="floating flex items-center gap-3 bg-background/90 backdrop-blur-md border border-text-secondary/10 p-3 pr-5 rounded-2xl shadow-xl hover:-translate-y-1 transition-transform duration-300"
                 style={{ animationDelay: `${i * 150}ms` }}
               >
@@ -131,7 +133,7 @@ export default function Hero() {
                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                   </svg>
                 </div>
-                <span className="text-xs md:text-sm font-semibold text-text-primary whitespace-nowrap">{stat.message}</span>
+                <span className="text-xs md:text-sm font-semibold text-text-primary whitespace-nowrap">{t(stat.message)}</span>
               </div>
             ))}
           </div>

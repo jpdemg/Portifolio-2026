@@ -1,6 +1,10 @@
+"use client"
+
 import { profile } from "@/app/data"
+import { useLang, ui } from "@/app/i18n"
 
 export default function Footer() {
+  const { t } = useLang()
   const currentYear = new Date().getFullYear()
 
   return (
@@ -8,9 +12,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="text-center md:text-left">
           <p className="text-sm font-medium text-text-secondary">
-            &copy; {currentYear} {profile.name}. Todos os direitos reservados.
+            &copy; {currentYear} {profile.name}. {t(ui.footer.rights)}
           </p>
-          <p className="text-xs font-medium text-text-secondary/70 mt-1">Feito com Next.js & Tailwind CSS</p>
+          <p className="text-xs font-medium text-text-secondary/70 mt-1">{t(ui.footer.built)}</p>
         </div>
         <div className="flex flex-wrap justify-center items-center gap-6">
           <a href={profile.github} target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-text-primary transition-colors text-xs font-bold uppercase tracking-widest">
@@ -20,7 +24,7 @@ export default function Footer() {
             LinkedIn
           </a>
           <a href={`mailto:${profile.email}`} className="text-text-secondary hover:text-text-primary transition-colors text-xs font-bold uppercase tracking-widest">
-            E-mail
+            {t(ui.contact.email)}
           </a>
         </div>
       </div>

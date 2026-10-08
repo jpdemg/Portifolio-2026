@@ -2,17 +2,19 @@
 
 import { useState, useEffect } from "react"
 import FadeDown from "./animations/FadeDown"
-import { profile } from "@/app/data"
+import { useLang, ui, type Lang } from "@/app/i18n"
 
 const shortCut = [
-  { name: "Home", link: "home" },
-  { name: "About", link: "about" },
-  { name: "Experience", link: "experience" },
-  { name: "Projects", link: "projects" },
-  { name: "Contacts", link: "contacts" },
+  { name: ui.nav.home, link: "home" },
+  { name: ui.nav.about, link: "about" },
+  { name: ui.nav.experience, link: "experience" },
+  { name: ui.nav.education, link: "education" },
+  { name: ui.nav.projects, link: "projects" },
+  { name: ui.nav.contacts, link: "contacts" },
 ]
 
 export default function Header() {
+  const { lang, setLang, t } = useLang()
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("home")
   const [isDark, setIsDark] = useState(false)
@@ -66,7 +68,7 @@ export default function Header() {
       <div className="w-full max-w-4xl pointer-events-auto">
         <FadeDown>
           <div className="relative flex items-center justify-between py-2 md:py-2.5 px-4 md:px-6 bg-background/80 backdrop-blur-md border border-text-secondary/20 rounded-full shadow-lg transition-colors duration-300">
-            <span className="text-base md:text-lg font-black text-text-primary tracking-tighter">{profile.initials}.</span>
+            <span className="text-base md:text-lg font-black text-text-primary tracking-tighter">{t(ui.brand)}</span>
 
             <nav className="flex-row md:gap-6 lg:gap-7 hidden lg:flex items-center">
               {shortCut.map((item) => (
@@ -77,13 +79,28 @@ export default function Header() {
                     activeSection === item.link ? "text-text-primary font-bold" : "text-text-secondary font-medium hover:text-text-primary"
                   } cursor-pointer text-xs md:text-sm tracking-wide transition-colors duration-200 ease-in-out`}
                 >
-                  {item.name}
+                  {t(item.name)}
                 </button>
               ))}
             </nav>
 
             <div className="flex items-center gap-3">
-              <button className="cursor-pointer text-text-secondary hover:text-text-primary transition-colors" onClick={toggleTheme} aria-label="Alternar tema">
+              <div role="group" aria-label={t(ui.langLabel)} className="flex items-center rounded-full border border-text-secondary/20 p-0.5 text-[11px] font-bold tracking-wider">
+                {(["pt", "en"] as Lang[]).map((code) => (
+                  <button
+                    key={code}
+                    onClick={() => setLang(code)}
+                    aria-pressed={lang === code}
+                    className={`cursor-pointer rounded-full px-2 py-0.5 uppercase transition-colors duration-200 ${
+                      lang === code ? "bg-text-primary text-background" : "text-text-secondary hover:text-text-primary"
+                    }`}
+                  >
+                    {code}
+                  </button>
+                ))}
+              </div>
+
+              <button className="cursor-pointer text-text-secondary hover:text-text-primary transition-colors" onClick={toggleTheme} aria-label={t(ui.themeToggle)}>
                 {isDark ? (
                   <svg className="w-4 h-4 md:w-5 md:h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 21a9 9 0 0 1-.5-17.986V3c-.354.966-.5 1.911-.5 3a9 9 0 0 0 9 9c.239 0 .254.018.488 0A9.004 9.004 0 0 1 12 21Z" />
@@ -95,7 +112,7 @@ export default function Header() {
                 )}
               </button>
 
-              <button className="lg:hidden text-text-secondary" onClick={() => setIsOpen(!isOpen)} aria-label="Abrir menu">
+              <button className="lg:hidden text-text-secondary" onClick={() => setIsOpen(!isOpen)} aria-label={t(ui.menuToggle)}>
                 <svg className="w-5 md:w-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                   <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h14" />
                 </svg>
@@ -115,7 +132,7 @@ export default function Header() {
                       activeSection === item.link ? "text-text-primary font-bold" : "text-text-secondary font-medium"
                     } cursor-pointer text-sm hover:text-text-primary transition-colors duration-200 ease-in-out text-left`}
                   >
-                    {item.name}
+                    {t(item.name)}
                   </button>
                 ))}
               </div>

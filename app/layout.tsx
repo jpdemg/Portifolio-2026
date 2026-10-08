@@ -1,7 +1,10 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import PageLoader from "@/components/PageLoader"
+import { LanguageProvider } from "./i18n"
 import { profile } from "./data"
+
+const description = typeof profile.bio === "string" ? profile.bio : profile.bio.pt
 
 const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://joaopedro.dev"
 
@@ -11,7 +14,7 @@ export const metadata: Metadata = {
     default: `${profile.shortName} | Portfólio`,
     template: `%s | ${profile.shortName}`,
   },
-  description: profile.bio,
+  description,
   keywords: ["João Pedro", "Portfólio", "Python", "JavaScript", "SQL", "Customer Experience", "Apple"],
   authors: [{ name: profile.name }],
   creator: profile.name,
@@ -20,7 +23,7 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     url: "/",
     title: `${profile.shortName} | Portfólio`,
-    description: profile.bio,
+    description,
     siteName: `${profile.shortName} Portfólio`,
     images: [{ url: profile.photoUrl, width: 800, height: 800, alt: profile.name }],
   },
@@ -48,8 +51,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className="font-sans antialiased">
-        <PageLoader />
-        {children}
+        <LanguageProvider>
+          <PageLoader />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   )

@@ -3,15 +3,17 @@
 import { useState } from "react"
 import FadeDown from "@/components/animations/FadeDown"
 import { profile } from "./data"
+import { useLang, ui } from "./i18n"
 
 export default function Contact() {
+  const { t } = useLang()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    const subject = encodeURIComponent(`Contato pelo portfólio — ${name || "sem nome"}`)
+    const subject = encodeURIComponent(`${t(ui.contact.subject)} — ${name || t(ui.contact.noName)}`)
     const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`)
     window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`
   }
@@ -20,10 +22,10 @@ export default function Contact() {
     <section id="contacts" className="w-full max-w-7xl mx-auto py-24 md:py-32 cursor-default bg-background relative overflow-hidden border-t border-text-secondary/10">
       <FadeDown>
         <div className="max-w-7xl mx-auto px-6 md:px-12 mb-16 md:mb-24 w-full text-left">
-          <h2 className="text-sm font-bold tracking-[0.2em] text-text-secondary uppercase mb-4">Fale comigo</h2>
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter">Contato</h3>
+          <h2 className="text-sm font-bold tracking-[0.2em] text-text-secondary uppercase mb-4">{t(ui.contact.eyebrow)}</h2>
+          <h3 className="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter">{t(ui.contact.title)}</h3>
           <p className="mt-4 text-text-secondary max-w-xl font-medium">
-            Estou aberto a oportunidades de estágio. O formulário abre seu app de e-mail com a mensagem pronta para enviar.
+            {t(ui.contact.intro)}
           </p>
         </div>
       </FadeDown>
@@ -34,21 +36,21 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="bg-background border border-text-secondary/20 rounded-3xl p-6 md:p-8 shadow-xl flex flex-col gap-4">
               <div>
                 <label className="block text-xs uppercase tracking-widest font-bold text-text-secondary mb-2" htmlFor="name">
-                  Nome
+                  {t(ui.contact.name)}
                 </label>
                 <input
                   id="name"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Seu nome"
+                  placeholder={t(ui.contact.namePh)}
                   className="w-full rounded-xl bg-thirdary/30 border border-text-secondary/20 px-4 py-3 text-sm font-medium text-text-primary outline-none focus:border-text-primary transition-colors"
                 />
               </div>
 
               <div>
                 <label className="block text-xs uppercase tracking-widest font-bold text-text-secondary mb-2" htmlFor="email">
-                  E-mail
+                  {t(ui.contact.email)}
                 </label>
                 <input
                   id="email"
@@ -56,14 +58,14 @@ export default function Contact() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="seu@email.com"
+                  placeholder={t(ui.contact.emailPh)}
                   className="w-full rounded-xl bg-thirdary/30 border border-text-secondary/20 px-4 py-3 text-sm font-medium text-text-primary outline-none focus:border-text-primary transition-colors"
                 />
               </div>
 
               <div>
                 <label className="block text-xs uppercase tracking-widest font-bold text-text-secondary mb-2" htmlFor="message">
-                  Mensagem
+                  {t(ui.contact.message)}
                 </label>
                 <textarea
                   id="message"
@@ -71,13 +73,13 @@ export default function Contact() {
                   rows={5}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Como posso ajudar?"
+                  placeholder={t(ui.contact.messagePh)}
                   className="w-full rounded-xl bg-thirdary/30 border border-text-secondary/20 px-4 py-3 text-sm font-medium text-text-primary outline-none focus:border-text-primary transition-colors resize-none"
                 />
               </div>
 
               <button type="submit" className="mt-2 bg-button-hero text-background font-bold text-sm tracking-widest uppercase py-4 rounded-xl hover:-translate-y-1 transition-transform duration-300">
-                Enviar mensagem
+                {t(ui.contact.send)}
               </button>
             </form>
 
@@ -107,7 +109,7 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-text-primary">E-mail</h4>
+                    <h4 className="text-lg font-bold text-text-primary">{t(ui.contact.email)}</h4>
                     <p className="text-sm font-medium text-text-secondary">{profile.email}</p>
                   </div>
                 </div>
